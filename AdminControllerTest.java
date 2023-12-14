@@ -36,16 +36,23 @@ public class AdminControllerTest {
         MockitoAnnotations.initMocks(this);
     }
 
+
     @Test
     public void testIndex() {
+        // Mocking the Model
         Model model = mock(Model.class);
 
+        // Stubbing the userService.checkLogin() method
         when(userService.checkLogin(anyString(), anyString())).thenReturn(new User());
+
+        // Executing the controller method
         String result = controller.index(model);
 
+        // Asserting the result
         assertEquals("index", result);
-        verify(model, times(1)).addAttribute(eq("username"), anyString());
-    }
 
+        // Verifying model interactions
+        verify(model, times(1)).addAttribute(eq("userid"), anyString());
+    }
 
 }
